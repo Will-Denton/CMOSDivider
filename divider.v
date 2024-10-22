@@ -9,7 +9,6 @@ Currently we assume that both inputs are normalized and that in1 > in2.
 */
 
 module divider(
-
     input [11:0] data_input_1, // 12-bit input data in 12 bit floating point format
     input [11:0] data_input_2, // 12-bit input data in 12 bit floating point format
 
