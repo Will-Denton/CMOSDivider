@@ -1,0 +1,56 @@
+$date
+	Wed Nov 06 21:58:23 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ps
+$end
+$scope module divider_tb $end
+$var wire 1 ! done $end
+$var wire 12 " data_output [11:0] $end
+$var reg 12 # data_input_1 [11:0] $end
+$var reg 12 $ data_input_2 [11:0] $end
+$scope module divider_inst $end
+$var wire 1 % clk $end
+$var wire 12 & data_input_1 [11:0] $end
+$var wire 12 ' data_input_2 [11:0] $end
+$var wire 1 ! done $end
+$var wire 1 ( sign $end
+$var wire 7 ) out_mantissa_temp [6:0] $end
+$var wire 5 * out_exp_temp_norm [4:0] $end
+$var wire 5 + out_exp_temp [4:0] $end
+$var wire 7 , mantissa_2_leading_1 [6:0] $end
+$var wire 14 - mantissa_1_shifted [13:0] $end
+$var wire 7 . mantissa_1_leading_1 [6:0] $end
+$var wire 1 / leading_mantissa_one $end
+$var wire 14 0 div_mantissa_result [13:0] $end
+$var wire 12 1 data_output [11:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b101111010000 1
+b1010000 0
+1/
+b1111000 .
+b1111000000000 -
+b1100000 ,
+b1111 +
+b1110 *
+b1010000 )
+1(
+b10001100000 '
+b110001111000 &
+0%
+b10001100000 $
+b110001111000 #
+b101111010000 "
+z!
+$end
+#200
