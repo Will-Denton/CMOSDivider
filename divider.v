@@ -35,7 +35,7 @@ module divider(
     assign mantissa_1_shifted = {mantissa_1_leading_1, 6'd0};
 
     wire[13:0] div_mantissa_result;
-    assign div_mantissa_result = mantissa_1_shifted / mantissa_2_leading_1;
+    assign div_mantissa_result = mantissa_1_shifted     / mantissa_2_leading_1;
 
     wire[6:0] out_mantissa_temp;
     assign out_mantissa_temp = div_mantissa_result[6:0];
