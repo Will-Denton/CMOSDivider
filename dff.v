@@ -6,7 +6,7 @@ module dff(
     output reg q
 );
 
-    always @(posedge clk) begin
+    always @(posedge clk or posedge clr) begin
         if (clr)
             q <= 0;
         else if (en)

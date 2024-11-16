@@ -1,13 +1,13 @@
-module cla7_bit(
-    input [6:0] A, B,
+module cla_8bit(
+    input [7:0] A, B,
     input c0,
-    output [6:0] S,
+    output [7:0] S,
     output c_out
     );
 
-    wire c1, c2, c3, c4, c5, c6, c7;
-    wire p0, p1, p2, p3, p4, p5, p6;
-    wire g0, g1, g2, g3, g4, g5, p7;
+    wire c1, c2, c3, c4, c5, c6, c7, c8;
+    wire p0, p1, p2, p3, p4, p5, p6, p7;
+    wire g0, g1, g2, g3, g4, g5, g6, g7;
 
     and And0(g0, A[0], B[0]);
     and And1(g1, A[1], B[1]);
@@ -16,6 +16,7 @@ module cla7_bit(
     and And4(g4, A[4], B[4]);
     and And5(g5, A[5], B[5]);
     and And6(g6, A[6], B[6]);
+    and And7(g7, A[7], B[7]);
 
     or Or0(p0, A[0], B[0]);
     or Or1(p1, A[1], B[1]);
@@ -24,6 +25,7 @@ module cla7_bit(
     or Or4(p4, A[4], B[4]);
     or Or5(p5, A[5], B[5]);
     or Or6(p6, A[6], B[6]);
+    or Or7(p7, A[7], B[7]);
 
     wire c1a1;
     and c1and1(c1a1, p0, c0);
@@ -81,5 +83,17 @@ module cla7_bit(
     or  c7or1(c7, c7a7, c7a6, c7a5, c7a4, c7a3, c7a2, c7a1, g6);
     xor s6xor1(S[6], A[6], B[6], c6);
 
-    assign c_out = c7;
+    wire c8a8, c8a7, c8a6, c8a5, c8a4, c8a3, c8a2, c8a1;
+    and c8and1(c8a1, p7, g6);
+    and c8and2(c8a2, p7, p6, g5);
+    and c8and3(c8a3, p7, p6, p5, g4);
+    and c8and4(c8a4, p7, p6, p5, p4, g3);
+    and c8and5(c8a5, p7, p6, p5, p4, p3, g2);
+    and c8and6(c8a6, p7, p6, p5, p4, p3, p2, g1);
+    and c8and7(c8a7, p7, p6, p5, p4, p3, p2, p1, g0);
+    and c8and8(c8a7, p7, p6, p5, p4, p3, p2, p1, p0, c0);
+    or  c8or1(c8, c8a8, c8a7, c8a6, c8a5, c8a4, c8a3, c8a2, c8a1, g7);
+    xor s8xor1(S[7], A[7], B[7], c7);
+
+    assign c_out = c8;
 endmodule
