@@ -32,10 +32,24 @@ module divider(
     assign mantissa_2_leading_1 = {1'b1, data_input_2[5:0]};
 
     wire[13:0] mantissa_1_shifted;
-    assign mantissa_1_shifted = {mantissa_1_leading_1, 6'd0};
+    assign mantissa_1_shifted = {mantissa_1_leading_1, 7'd0}; 
 
-    wire[13:0] div_mantissa_result;
-    assign div_mantissa_result = mantissa_1_shifted     / mantissa_2_leading_1;
+    // wire[13:0] div_mantissa_result;
+    // assign div_mantissa_result = mantissa_1_shifted     / mantissa_2_leading_1;
+
+    wire[6:0] div_mantissa_raw;
+    wire[6:0] div_mantissa_result;
+    wire[4:0] mantissa_correction; //to be subtracted from exponent
+
+    assign {div_mantissa_result, mantissa_correction} = (div_mantissa_raw[6] == 1'b1) ? {div_mantissa_raw, 5'b0} : 12'bz;
+    assign {div_mantissa_result, mantissa_correction} = (div_mantissa_raw[6:5] == 2'b01) ? {div_mantissa_raw[5:0], 1'b0, 5'd1} : 12'bz;
+    assign {div_mantissa_result, mantissa_correction} = (div_mantissa_raw[6:4] == 3'b001) ? {div_mantissa_raw[4:0], 2'b0, 5'd2} : 12'bz;
+    assign {div_mantissa_result, mantissa_correction} = (div_mantissa_raw[6:3] == 4'b0001) ? {div_mantissa_raw[3:0], 3'b0, 5'd3} : 12'bz;
+    assign {div_mantissa_result, mantissa_correction} = (div_mantissa_raw[6:2] == 5'b00001) ? {div_mantissa_raw[2:0], 4'b0, 5'd4} : 12'bz;
+    assign {div_mantissa_result, mantissa_correction} = (div_mantissa_raw[6:1] == 6'b000001) ? {div_mantissa_raw[1:0], 5'b0, 5'd5} : 12'bz;
+    assign {div_mantissa_result, mantissa_correction} = (div_mantissa_raw[6:0] == 7'b0000001) ? {div_mantissa_raw[0], 6'b0, 5'd6} : 12'bz;
+    assign {div_mantissa_result, mantissa_correction} = (div_mantissa_raw[6:0] == 7'b0) ? {div_mantissa_raw, 5'b0} : 12'bz;
+
 
     wire[6:0] out_mantissa_temp;
     assign out_mantissa_temp = div_mantissa_result[6:0];
